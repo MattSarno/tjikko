@@ -34,3 +34,14 @@ Every record belongs to either a user or a garden. Membership is the tenant boun
 - **Planting** (garden-owned): a cultivar in a garden, **tagged with its season year** (see Timing), with an optional free-text location. It **copies the cultivar's timing rules when created** and keeps a nullable link back, so editing or deleting the cultivar never rewrites a plan or its history.
 - **Event** (garden-owned): an append-only entry on a planting recording what actually happened and when.
 - IDs are client-generated UUIDs, so offline sync stays possible later.
+
+## Timing, anchors, re-derivation and dates
+
+- **Timing rule**: a step (start indoors, transplant, harvest…), an **anchor** (last spring frost, first fall frost, sowing or transplant) and an **offset range** in days. The anchor matters: packet "days to maturity" usually counts from transplant, not sowing. A packet's single number is a range whose ends are equal.
+- **Season**: the year a planting's frost anchors resolve in. Garlic sown before the fall frost belongs to that fall's year; a December onion start belongs to the next spring's. A "next spring frost" anchor is deferred until a real crop needs it.
+- **Windows**: rules carry an offset range, so steps are windows. A dependent window runs from the earliest anchor date plus the shortest offset to the latest anchor date plus the longest. Logging the anchor narrows everything after it.
+- **Events**: one append-only log of "step X happened on date D" (`done`) or "it didn't" (`undone`). For each step, the latest event wins. A `done` on an anchor step (sowing, transplant) re-anchors every later step; on any other step it just marks it complete. Corrections are new events, never edits.
+- **The plan is a pure function** of the frost dates, season, the planting's rules, its events and *today*. Today is passed in; the scheduler crate bans clock calls.
+- **The UI reads the derived plan**, never the log: each step comes back as planned (window) or done (date).
+- **Dates**: calendar dates are plain dates end to end, with no time or zone: Postgres `date`, Rust `time::Date`, `"YYYY-MM-DD"` in JSON. An event stores the plain date it happened (backdating allowed) plus a UTC logged-at time, shown in browser time.
+- **Feb 29 is rejected as a frost date**, so a non-leap season never shifts a date silently.
