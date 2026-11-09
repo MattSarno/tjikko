@@ -37,6 +37,17 @@ keeps it for you.
 
 Rust · Axum · Svelte · Postgres (Neon) · Fly.io
 
+## Quickstart
+
+You will need Rust (stable) and Node at the version in `web/.node-version`.
+
+```sh
+cargo run -p server                # the API, on localhost:8080
+cd web && npm ci && npm run dev    # the app, on localhost:5173
+```
+
+Open http://localhost:5173. If the homepage shows a version number, the two are talking. The full set of checks lives in [AGENTS.md](AGENTS.md).
+
 ## More
 
 - [docs/design.md](docs/design.md): how the system works
