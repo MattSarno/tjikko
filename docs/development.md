@@ -15,7 +15,7 @@ One flow with skippable steps: one session, one branch, one PR. Matt owns intent
 6. **Review**: Matt checks shape and intent first (keep, comment or scrap), then a fresh-context agent checks correctness.
 7. **PR**, squash-merged by Matt.
 
-**Light flow**, for fixes, refactors, dependency bumps and docs: no spec, UX or scaffold. A bug starts with a failing test that reproduces it. The agent proposes the flow and Matt confirms. If a rule or user-facing change turns up, switch to the full flow; when unsure, use the full flow.
+**Light flow**, for fixes, refactors, dependency bumps and docs: no spec or UX. Matt still scaffolds anything that adds names, signatures, modules or code files; only docs, dependency bumps and fixes inside existing functions skip it. A bug starts with a failing test that reproduces it. The agent proposes the flow and Matt confirms. If a rule or user-facing change turns up, switch to the full flow; when unsure, use the full flow.
 
 **Rules**
 - Only with Matt's OK: merging, CI changes, new dependencies.
