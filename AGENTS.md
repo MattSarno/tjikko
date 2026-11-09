@@ -13,4 +13,4 @@
     cargo fmt --all --check
     cargo clippy --workspace --all-targets -- -D warnings
     cargo test --workspace
-    cd web && npm ci && npm run check && npm test && npm run build
+    cd web && npm ci && npm run lint && npm run check && npm test && npm run build
