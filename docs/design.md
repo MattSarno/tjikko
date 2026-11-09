@@ -48,7 +48,7 @@ Every record belongs to either a user or a garden. Membership is the tenant boun
 
 ## Stack
 
-- **Two-crate Cargo workspace**: `crates/scheduler` is pure, with no database, HTTP or clock crates in its manifest, so the compiler keeps I/O out, its tests build without the server, and it can compile to WASM later. `crates/server` (axum) owns HTTP, Postgres and auth.
+- **Two-crate Cargo workspace**: `scheduler/` is pure, with no database, HTTP or clock crates in its manifest, so the compiler keeps I/O out, its tests build without the server, and it can compile to WASM later. `server/` (axum) owns HTTP, Postgres and auth.
 - **Frontend**: a static Svelte SPA in `web/` talking to the Rust API. SvelteKit server routes were rejected: they'd put a second backend (Node) in front of Rust.
 - **Hosting**: Fly.io for the server, Neon for Postgres. Neon scales to zero, so `/health` never touches the database.
 - **Auth**: Neon Auth issues short-lived EdDSA JWTs; the server's login check verifies them against Neon's JWKS endpoint. The SPA builds its own login screens on Neon's JS client, since Neon's prebuilt UI is React.

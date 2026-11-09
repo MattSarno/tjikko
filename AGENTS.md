@@ -5,8 +5,8 @@
 - How the system works: `docs/design.md`. How work gets done: `docs/development.md`.
 
 ## Layout
-- `crates/scheduler`: pure scheduling logic. No database, HTTP or clock crates.
-- `crates/server`: axum; serves the API and the built SPA.
+- `scheduler/`: pure scheduling logic. No database, HTTP or clock crates.
+- `server/`: axum; serves the API and the built SPA.
 - `web/`: static Svelte SPA.
 
 ## Build and test
