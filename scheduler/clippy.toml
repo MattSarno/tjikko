@@ -1,0 +1,4 @@
+disallowed-methods = [
+    { path = "std::time::SystemTime::now", reason = "pass today in; the scheduler is pure" },
+    { path = "std::time::Instant::now", reason = "pass today in; the scheduler is pure" },
+]
