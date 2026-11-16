@@ -1,7 +1,6 @@
 # AGENTS.md
 
 ## Context
-- Project context, decisions and the backlog live in Pando (MCP server `pando`). Read `preference/pando-protocol` first, then the `tjikko` subject's entries.
 - How the system works: `docs/design.md`. How work gets done: `docs/development.md`. How code is written: `docs/conventions.md`.
 
 ## Layout
