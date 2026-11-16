@@ -1,0 +1,15 @@
+# AGENTS.md
+
+## Context
+- How the system works: `docs/design.md`. How work gets done: `docs/development.md`. How code is written: `docs/conventions.md`.
+
+## Layout
+- `scheduler/`: pure scheduling logic. No database, HTTP or clock crates.
+- `server/`: axum; serves the API and the built SPA.
+- `web/`: static Svelte SPA.
+
+## Build and test
+    cargo fmt --all --check
+    cargo clippy --workspace --all-targets -- -D warnings
+    cargo test --workspace
+    cd web && npm ci && npm run lint && npm run check && npm test && npm run build
